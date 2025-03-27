@@ -11,6 +11,8 @@
 #include "validationLayers.h"
 #include "device.h"
 #include "swapchain.h"
+#include "buffer.h"
+#include "utils.h"
 
 
 const uint32_t WIDTH = 800;
@@ -18,9 +20,8 @@ const uint32_t HEIGHT = 600;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
-static std::vector<char> readFile(const std::string& filename);
+//static std::vector<char> readFile(const std::string& filename);
 
-static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
 
 
 
@@ -51,6 +52,8 @@ private:
     std::vector<VkFramebuffer> swapChainFramebuffers;
     VkCommandPool commandPool;
     std::vector<VkCommandBuffer> commandBuffers;
+    VkBuffer vertexBuffer;
+    VkDeviceMemory vertexBufferMemory;
 
     std::vector <VkSemaphore> imageAvailableSemaphores;
     std::vector <VkSemaphore> renderFinishedSemaphores;
@@ -58,9 +61,8 @@ private:
 
     uint32_t currentFrame = 0;
 
-    
+    static void framebufferResizeCallback(GLFWwindow* window, int width, int height);
 
-    
     VkShaderModule createShaderModule(const std::vector<char>& code, VkDevice& device);
     void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
 
@@ -76,6 +78,9 @@ private:
     void recreateSwapChain();
     void cleanupSwapChain();
 
+    void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
+    void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
+
     void createInstance();
     void setupDebugMessenger();
     void createSurface();
@@ -87,8 +92,11 @@ private:
     void createGraphicsPipeline();
     void createFramebuffers();
     void createCommandPool();
-    void createCommandBuffers();    
+    void createCommandBuffers();
+    void createVertexBuffer();
     void createSyncObjects();
+
+   
 
     
 
