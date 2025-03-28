@@ -52,8 +52,11 @@ private:
     std::vector<VkFramebuffer> swapChainFramebuffers;
     VkCommandPool commandPool;
     std::vector<VkCommandBuffer> commandBuffers;
+
     VkBuffer vertexBuffer;
     VkDeviceMemory vertexBufferMemory;
+    VkBuffer indexBuffer;
+    VkDeviceMemory indexBufferMemory;
 
     std::vector <VkSemaphore> imageAvailableSemaphores;
     std::vector <VkSemaphore> renderFinishedSemaphores;
@@ -94,6 +97,7 @@ private:
     void createCommandPool();
     void createCommandBuffers();
     void createVertexBuffer();
+    void createIndexBuffer();
     void createSyncObjects();
 
    

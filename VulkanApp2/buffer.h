@@ -15,6 +15,7 @@ struct Vertex {
 };
 
 extern const std::vector<Vertex> vertices;
+extern const std::vector<uint16_t> indices;
 
 uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties, VkPhysicalDevice physicaldevice);
 
