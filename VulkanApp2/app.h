@@ -47,16 +47,25 @@ private:
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
     VkRenderPass renderPass;
+    VkDescriptorSetLayout descriptorSetLayout;
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
     std::vector<VkFramebuffer> swapChainFramebuffers;
+
     VkCommandPool commandPool;
-    std::vector<VkCommandBuffer> commandBuffers;
+    VkDescriptorPool descriptorPool;
+    std::vector<VkDescriptorSet> descriptorSets;
 
     VkBuffer vertexBuffer;
     VkDeviceMemory vertexBufferMemory;
     VkBuffer indexBuffer;
     VkDeviceMemory indexBufferMemory;
+
+    std::vector<VkCommandBuffer> commandBuffers;
+    
+    std::vector<VkBuffer> uniformBuffers;
+    std::vector<VkDeviceMemory> uniformBuffersMemory;
+    std::vector<void*> uniformBuffersMapped;
 
     std::vector <VkSemaphore> imageAvailableSemaphores;
     std::vector <VkSemaphore> renderFinishedSemaphores;
@@ -83,6 +92,8 @@ private:
 
     void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
     void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
+    void updateUniformBuffer(uint32_t currentImage);
+
 
     void createInstance();
     void setupDebugMessenger();
@@ -92,12 +103,16 @@ private:
     void createSwapChain();
     void createImageViews();
     void createRenderPass();
+    void createDescriptorSetLayout();
     void createGraphicsPipeline();
     void createFramebuffers();
     void createCommandPool();
     void createCommandBuffers();
+    void createDescriptorPool();
+    void createDescriptorSets();
     void createVertexBuffer();
     void createIndexBuffer();
+    void createUniformBuffers();
     void createSyncObjects();
 
    

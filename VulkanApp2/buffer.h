@@ -4,6 +4,9 @@
 #include <vector>
 #include <array>
 #include <glm/glm.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <chrono>
+
 
 struct Vertex {
 	glm::vec2 pos;
@@ -13,6 +16,13 @@ struct Vertex {
 	static std::array<VkVertexInputAttributeDescription, 2>  getAttributeDescriptions();
 
 };
+
+struct UniformBufferObject {
+	glm::mat4 model;
+	glm::mat4 view;
+	glm::mat4 proj;
+};
+
 
 extern const std::vector<Vertex> vertices;
 extern const std::vector<uint16_t> indices;

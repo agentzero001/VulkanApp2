@@ -10,6 +10,7 @@ const std::vector<Vertex> vertices{
 
 const std::vector<uint16_t> indices = { 0, 1, 2, 2, 3, 0 };
 
+
 VkVertexInputBindingDescription Vertex::getBindingDescription() {
 	VkVertexInputBindingDescription bindingDescription{};
 	bindingDescription.binding = 0;
@@ -47,7 +48,6 @@ uint32_t findMemoryType(uint32_t typeFilter, VkMemoryPropertyFlags properties, V
 	}
 	throw std::runtime_error("failed to find suitable memory type!");
 }
-
 
 //void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory, VkDevice device, VkPhysicalDevice physicalDevice) {
 //	VkBufferCreateInfo bufferInfo{};
