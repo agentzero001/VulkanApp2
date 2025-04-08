@@ -18,9 +18,9 @@ struct Vertex {
 };
 
 struct UniformBufferObject {
-	glm::mat4 model;
-	glm::mat4 view;
-	glm::mat4 proj;
+	alignas(16) glm::mat4 model;
+	alignas(16) glm::mat4 view;
+	alignas(16) glm::mat4 proj;
 };
 
 
@@ -36,3 +36,10 @@ void createBuffer(VkDeviceSize size,
 	VkDeviceMemory& bufferMemory,
 	VkDevice device,
 	VkPhysicalDevice physicalDevice);
+
+VkCommandBuffer beginSingleTimeCommands(VkCommandPool commandPool, VkDevice device);
+
+void endSingleTimeCommands(VkCommandBuffer commandBuffer, VkQueue graphicsQueue, VkDevice device, VkCommandPool commandPool);
+
+
+void copyBufferToImage(VkBuffer buffer, VkImage image, uint32_t width, uint32_t height, VkQueue graphicsQueue, VkDevice device, VkCommandPool commandPool);

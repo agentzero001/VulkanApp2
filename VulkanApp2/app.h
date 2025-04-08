@@ -1,6 +1,7 @@
 #pragma once
 
 #define GLFW_INCLUDE_VULKAN
+
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <stdexcept>
@@ -13,7 +14,7 @@
 #include "swapchain.h"
 #include "buffer.h"
 #include "utils.h"
-
+#include "stb_image.h"
 
 const uint32_t WIDTH = 800;
 const uint32_t HEIGHT = 600;
@@ -24,15 +25,14 @@ const int MAX_FRAMES_IN_FLIGHT = 2;
 
 
 
-
-
-
 class Application {
 public:
     bool framebufferResized = false;
     void run();
 
 private:
+
+    //considerate refactoring might as well happen in this place someday soon.
     GLFWwindow* window;
     VkInstance instance;
     VkSurfaceKHR surface;
@@ -51,6 +51,11 @@ private:
     VkPipelineLayout pipelineLayout;
     VkPipeline graphicsPipeline;
     std::vector<VkFramebuffer> swapChainFramebuffers;
+
+    VkImage textureImage;
+    VkDeviceMemory textureImageMemory;
+    VkImageView textureImageView;
+
 
     VkCommandPool commandPool;
     VkDescriptorPool descriptorPool;
@@ -77,6 +82,7 @@ private:
 
     VkShaderModule createShaderModule(const std::vector<char>& code, VkDevice& device);
     void recordCommandBuffer(VkCommandBuffer commandBuffer, uint32_t imageIndex);
+    void transitionImageLayout(VkImage image, VkFormat format, VkImageLayout oldLayout, VkImageLayout newLayout);
 
 
     void initWindow();
@@ -93,8 +99,10 @@ private:
     void copyBuffer(VkBuffer srcBuffer, VkBuffer dstBuffer, VkDeviceSize size);
     void createBuffer(VkDeviceSize size, VkBufferUsageFlags usage, VkMemoryPropertyFlags properties, VkBuffer& buffer, VkDeviceMemory& bufferMemory);
     void updateUniformBuffer(uint32_t currentImage);
+    //void createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory);
+    
 
-
+    
     void createInstance();
     void setupDebugMessenger();
     void createSurface();
@@ -114,6 +122,10 @@ private:
     void createIndexBuffer();
     void createUniformBuffers();
     void createSyncObjects();
+    void createTextureImage();
+    void createTextureImageView();
+    
+
 
    
 

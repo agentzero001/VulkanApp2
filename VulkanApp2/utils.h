@@ -1,4 +1,6 @@
 #pragma once
+#define GLFW_INCLUDE_VULKAN
+#include <GLFW/glfw3.h>
 #include <vector>
 #include <iostream>
 #include <fstream>
@@ -24,3 +26,7 @@ static std::vector<char> readFile(const std::string& filename) {
 	return buffer;
 
 }
+
+void createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory, VkDevice device, VkPhysicalDevice physicalDevice);
+
+VkImageView createImageView(VkImage image, VkFormat format, VkDevice device);

@@ -33,6 +33,9 @@
     <ClCompile Include="buffer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="app.h">
@@ -59,5 +62,10 @@
     <None Include="shaders\vert.spv" />
     <None Include="shaders\shader.vert" />
     <None Include="shaders\shader.frag" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="textures\statue.jpg">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
