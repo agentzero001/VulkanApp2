@@ -29,4 +29,10 @@ static std::vector<char> readFile(const std::string& filename) {
 
 void createImage(uint32_t width, uint32_t height, VkFormat format, VkImageTiling tiling, VkImageUsageFlags usage, VkMemoryPropertyFlags properties, VkImage& image, VkDeviceMemory& imageMemory, VkDevice device, VkPhysicalDevice physicalDevice);
 
-VkImageView createImageView(VkImage image, VkFormat format, VkDevice device);
+VkImageView createImageView(VkImage image, VkFormat format, VkImageAspectFlags aspectFlags, VkDevice device);
+
+VkFormat findSupportedFormat(const std::vector<VkFormat>& candidates, VkImageTiling tiling, VkFormatFeatureFlags features, VkDevice physicalDevice);
+
+VkFormat findDepthFormat(VkPhysicalDevice physicalDevice);
+
+bool hasStencilComponent(VkFormat format);

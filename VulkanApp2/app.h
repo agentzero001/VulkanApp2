@@ -1,6 +1,8 @@
 #pragma once
 
 #define GLFW_INCLUDE_VULKAN
+#define GLM_FORCE_RADIANS
+#define GLM_FORCE_DEPTH_ZERO_TO_ONE
 
 #include <GLFW/glfw3.h>
 #include <iostream>
@@ -16,8 +18,8 @@
 #include "utils.h"
 #include "stb_image.h"
 
-const uint32_t WIDTH = 800;
-const uint32_t HEIGHT = 600;
+const uint32_t WIDTH = 1600;
+const uint32_t HEIGHT = 900;
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -43,7 +45,7 @@ private:
     VkQueue presentQueue;
     VkSwapchainKHR swapChain;
     std::vector<VkImage> swapChainImages;
-    std::vector<VkImageView>swapChainImageViews;
+    std::vector<VkImageView> swapChainImageViews;
     VkFormat swapChainImageFormat;
     VkExtent2D swapChainExtent;
     VkRenderPass renderPass;
@@ -55,7 +57,11 @@ private:
     VkImage textureImage;
     VkDeviceMemory textureImageMemory;
     VkImageView textureImageView;
+    VkSampler textureSampler;
 
+    VkImage depthImage;
+    VkDeviceMemory depthImageMemory;
+    VkImageView depthImageView;
 
     VkCommandPool commandPool;
     VkDescriptorPool descriptorPool;
@@ -124,6 +130,8 @@ private:
     void createSyncObjects();
     void createTextureImage();
     void createTextureImageView();
+    void createTextureSampler();
+    void createDepthResources();
     
 
 

@@ -5,6 +5,10 @@
 
 
 bool isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR surface) {
+	VkPhysicalDeviceFeatures supportedFeatures;
+	vkGetPhysicalDeviceFeatures(device, &supportedFeatures);
+
+
 	QueueFamilyIndices indices = findQueueFamilies(device, surface);
 
 	bool extensionsSupported = checkDeviceExtensionSupport(device);
@@ -13,9 +17,10 @@ bool isDeviceSuitable(VkPhysicalDevice device, VkSurfaceKHR surface) {
 	if (extensionsSupported) {
 		SwapChainSupportDetails swapChainSupport = querySwapChainSupport(device, surface);
 		swapChainAdequate = !swapChainSupport.formats.empty() && !swapChainSupport.presentModes.empty();
+
 	}
 
-	return indices.isComplete() && extensionsSupported && swapChainAdequate;
+	return indices.isComplete() && extensionsSupported && swapChainAdequate && supportedFeatures.samplerAnisotropy;
 }
 
 bool checkDeviceExtensionSupport(VkPhysicalDevice device) {
