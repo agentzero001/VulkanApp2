@@ -47,11 +47,11 @@ bool QueueFamilyIndices::isComplete() {
 }
 
 QueueFamilyIndices findQueueFamilies(VkPhysicalDevice device, VkSurfaceKHR surface) {
+	//note that it might be the case that a device reports more than one queue family with apparently identical properties.
 	QueueFamilyIndices indices;
 
-
 	uint32_t queueFamilyCount = 0;
-	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr);
+	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, nullptr); 
 	std::vector<VkQueueFamilyProperties> queueFamilies(queueFamilyCount);
 	vkGetPhysicalDeviceQueueFamilyProperties(device, &queueFamilyCount, queueFamilies.data());
 

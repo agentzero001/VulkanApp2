@@ -4,6 +4,8 @@
 #define GLM_FORCE_RADIANS
 #define GLM_FORCE_DEPTH_ZERO_TO_ONE
 
+
+
 #include <GLFW/glfw3.h>
 #include <iostream>
 #include <stdexcept>
@@ -11,15 +13,22 @@
 #include <vector>
 #include <set>
 #include <fstream>
+#include <unordered_map>
 #include "validationLayers.h"
 #include "device.h"
 #include "swapchain.h"
 #include "buffer.h"
 #include "utils.h"
 #include "stb_image.h"
+#include "tiny_obj_loader.h"
+
 
 const uint32_t WIDTH = 1600;
 const uint32_t HEIGHT = 900;
+
+const std::string MODEL_PATH = "models/viking_room.obj";
+const std::string TEXTURE_PATH = "textures/viking_room.png";
+
 
 const int MAX_FRAMES_IN_FLIGHT = 2;
 
@@ -66,6 +75,10 @@ private:
     VkCommandPool commandPool;
     VkDescriptorPool descriptorPool;
     std::vector<VkDescriptorSet> descriptorSets;
+
+    std::vector<Vertex> vertices;
+    std::vector<uint32_t> indices;
+
 
     VkBuffer vertexBuffer;
     VkDeviceMemory vertexBufferMemory;
@@ -132,6 +145,7 @@ private:
     void createTextureImageView();
     void createTextureSampler();
     void createDepthResources();
+    void loadModel();
     
 
 
