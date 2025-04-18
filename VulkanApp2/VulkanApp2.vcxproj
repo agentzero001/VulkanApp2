@@ -161,6 +161,9 @@
     <Image Include="textures\statue.jpg" />
     <Image Include="textures\viking_room.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Object Include="models\viking_room.obj" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
